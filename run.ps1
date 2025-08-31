@@ -7,12 +7,20 @@ param (
 
 $folder = "C:\Users\user\Desktop\courses\$folderExt"
 
-Start-Process firefox.exe "$url"
+firefox --new-window "$url" 
 
 if ($plusFile -eq 1) {
-    explorer.exe "$folder"
+    Start-Process explorer.exe "$folder" -WindowStyle Maximized 
 }
 
 if ($plusCode -eq 1) {
-    code "$folder" 
+    $vscodeProcess = Get-Process "Code" -ErrorAction SilentlyContinue
+    
+    if ($vscodeProcess) {
+        code "$folder"
+    } else {
+        Start-Process "code" "`"$folder`"" -WindowStyle Hidden
+    }
 }
+
+exit
