@@ -14,7 +14,8 @@ Numpad2::Send "^#{F4}"
 ; runs
 
 Numpad5::{ ; swap course of choice
-    global course, url
+    global course
+    global url
     ; waits for next input
     ih := InputHook("L1")
     ih.Start()
@@ -45,19 +46,16 @@ Numpad5::{ ; swap course of choice
 }
 
 Numpad1::{ ; run firefox on current course, or default
-    if (course == url == "") {
-        Run("firefox")
-    } else Run Format("firefox https://{1}/course/view.php?id={2}", LMS, url)
+    global url
+    Run Format("powershell.exe -ExecutionPolicy Bypass -File firefox.ps1 {1}", url)
 }
 
 Numpad3::{ ; run explorer on current course, or default
-    if (course == url == "") {
-        Run("explorer")
-    } else Run Format("explorer C:\Users\user\Desktop\courses\{1}", course)
+    global course
+    Run Format("powershell.exe -ExecutionPolicy Bypass -File explorer.ps1 {1}", course)
 }
 
 Numpad7::{ ; run code on current course, or default
-    if (course == url == "") {
-        Run("code")
-    } else Run Format("cmd.exe /c code C:\Users\user\Desktop\courses\{1}", course)
-}
+    global course
+    Run Format("powershell.exe -ExecutionPolicy Bypass -File code.ps1 {1}", course)
+} 
