@@ -1,56 +1,63 @@
 ; variables and controls
 
 LMS := EnvGet("LMS")
-
-plusFile := false
-Numpad1::{
-    global plusFile
-    plusFile := !plusFile
-    if (plusFile) {
-        SoundBeep(600, 50)
-    } else SoundBeep(200, 50)
-}
-
-plusCode := false
-Numpad3::{
-    global plusCode
-    plusCode := !plusCode
-    if (plusCode) {
-        SoundBeep(600, 50)
-    } else SoundBeep(200, 50)
-}
+course := ""
+url := ""
 
 ; simplify win11 desktop control
 
-Numpad8::Send "^#d"
-
+Numpad8::Send "^#d" 
 Numpad6::Send "^#{Right}"
-
 Numpad4::Send "^#{Left}"
-
 Numpad2::Send "^#{F4}"
 
-; common setups
+; runs
 
-Numpad5::{ ; work keys
+Numpad5::{ ; swap course of choice
+    global course, url
     ; waits for next input
     ih := InputHook("L1")
     ih.Start()
     SoundBeep(500, 50)
     ih.Wait()
-    ; second digit identifier, or b
+    ; second digit identifier, or 3 for b
     switch (ih.Input) {
         case "0": ; 204
-            Run Format("powershell.exe -ExecutionPolicy Bypass -File run.ps1 `"https://{1}/course/view.php?id=29005`" `"204`" {2} {3}", LMS, plusFile ? 1 : 0, plusCode ? 1 : 0)
+            course := "204"
+            url := "29005"
         case "1": ; 214
-            Run Format("powershell.exe -ExecutionPolicy Bypass -File run.ps1 `"https://{1}/course/view.php?id=28869`" `"214`" {2} {3}", LMS, plusFile ? 1 : 0, plusCode ? 1 : 0)
+            course := "214"
+            url := "28869"
         case "2": ; 221
-            Run Format("powershell.exe -ExecutionPolicy Bypass -File run.ps1 `"https://{1}/course/view.php?id=28821`" `"221`" {2} {3}", LMS, plusFile ? 1 : 0, plusCode ? 1 : 0)
+            course := "221"
+            url := "28821"
+        case "3": ; 214b
+            course := "214b"
+            url := "28309"
         case "4": ; 241
-            Run Format("powershell.exe -ExecutionPolicy Bypass -File run.ps1 `"https://{1}/course/view.php?id=28408`" `"241`" {2} {3}", LMS, plusFile ? 1 : 0, plusCode ? 1 : 0)
-        case "b": ; 214b
-            Run Format("powershell.exe -ExecutionPolicy Bypass -File run.ps1 `"https://{1}/course/view.php?id=28309`" `"214b`" {2} {3}", LMS, plusFile ? 1 : 0, plusCode ? 1 : 0)
+            course := "241"
+            url := "28408"
         default: 
-            Run "powershell.exe -ExecutionPolicy Bypass -File run.ps1 `"about:home`""
+            course := ""
+            url := ""
+            SoundBeep(100, 150)
     }
+}
+
+Numpad1::{ ; run firefox on current course, or default
+    if (course == url == "") {
+        Run("firefox")
+    } else Run Format("firefox https://{1}/course/view.php?id={2}", LMS, url)
+}
+
+Numpad3::{ ; run explorer on current course, or default
+    if (course == url == "") {
+        Run("explorer")
+    } else Run Format("explorer C:\Users\user\Desktop\courses\{1}", course)
+}
+
+Numpad7::{ ; run code on current course, or default
+    if (course == url == "") {
+        Run("code")
+    } else Run Format("cmd.exe /c code C:\Users\user\Desktop\courses\{1}", course)
 }

@@ -1,26 +1,28 @@
-param (
-    [string]$url,
-    [string]$folderExt,
-    [int]$plusFile,
-    [int]$plusCode
-)
+# file entierly unnecessary for now
 
-$folder = "C:\Users\user\Desktop\courses\$folderExt"
+# param (
+#     [string]$url,
+#     [string]$folderExt,
+#     [int]$plusFile,
+#     [int]$plusCode
+# )
 
-firefox --new-window "$url" 
+# $folder = "C:\Users\user\Desktop\courses\$folderExt"
 
-if ($plusFile -eq 1) {
-    Start-Process explorer.exe "$folder" -WindowStyle Maximized 
-}
+# firefox --new-window "$url" 
 
-if ($plusCode -eq 1) {
-    $vscodeProcess = Get-Process "Code" -ErrorAction SilentlyContinue
+# if ($plusFile -eq 1) {
+#     Start-Process explorer.exe "$folder" -WindowStyle Maximized 
+# }
+
+# if ($plusCode -eq 1) {
+#     $vscodeProcess = Get-Process "Code" -ErrorAction SilentlyContinue
     
-    if ($vscodeProcess) {
-        code "$folder"
-    } else {
-        Start-Process "code" "`"$folder`"" -WindowStyle Hidden
-    }
-}
+#     if ($vscodeProcess) {
+#         code "$folder"
+#     } else {
+#         Start-Process "code" "`"$folder`"" -WindowStyle Hidden
+#     }
+# }
 
-exit
+# exit
