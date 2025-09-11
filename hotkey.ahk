@@ -6,10 +6,10 @@ url := ""
 
 ; simplify win11 desktop control
 
-Numpad8::Send "^#d" 
-Numpad6::Send "^#{Right}"
-Numpad4::Send "^#{Left}"
-Numpad2::Send "^#{F4}"
+!3::Send "^#d" 
+!2::Send "^#{Right}"
+!1::Send "^#{Left}"
+!4::Send "^#{F4}"
 
 ; runs
 
@@ -59,3 +59,5 @@ Numpad7::{ ; run code on current course, or default
     global course
     Run Format("powershell.exe -ExecutionPolicy Bypass -File code.ps1 {1}", course)
 } 
+
+Numpad0::Send("!{F4}") ; close
