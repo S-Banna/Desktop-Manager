@@ -6,10 +6,10 @@ url := ""
 
 ; simplify win11 desktop control
 
-!3::Send "^#d" 
-!2::Send "^#{Right}"
 !1::Send "^#{Left}"
-!4::Send "^#{F4}"
+!2::Send "^#{Right}"
+Numpad8::Send "^#d" 
+Numpad2::Send "^#{F4}"
 
 ; runs
 
