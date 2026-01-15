@@ -23,21 +23,21 @@ Numpad5::{ ; swap course of choice
     ih.Wait()
     ; second digit identifier, or 3 for b
     switch (ih.Input) {
-        case "0": ; 204
-            course := "204"
-            url := "29005"
-        case "1": ; 214
-            course := "214"
-            url := "28869"
-        case "2": ; 221
-            course := "221"
-            url := "28821"
-        case "3": ; 214b
-            course := "214b"
-            url := "28309"
-        case "4": ; 241
-            course := "241"
-            url := "28408"
+        case "0": ; 240
+            course := "240c"
+            url := "31947"
+        case "1": ; 271
+            course := "271c"
+            url := "31778"
+        case "2": ; 242
+            course := "242c"
+            url := "31427"
+        case "3": ; 203
+            course := "203e"
+            url := "30467"
+        case "4": ; 201
+            course := "201s"
+            url := "31091"
         default: 
             course := ""
             url := ""
