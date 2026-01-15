@@ -3,7 +3,7 @@ param(
 )
 
 if ($ext -eq "") {
-    Start-Process explorer.exe -WindowStyle Maximized 
+    Start-Process explorer.exe
 } else {
-    Start-Process explorer.exe "C:\Users\user\Desktop\courses\$ext" -WindowStyle Maximized 
+    Start-Process explorer.exe "C:\Users\user\Desktop\courses\$ext"
 }
