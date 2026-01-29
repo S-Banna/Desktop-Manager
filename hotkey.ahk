@@ -21,7 +21,7 @@ Numpad5::{ ; swap course of choice
     ih.Start()
     SoundBeep(500, 50)
     ih.Wait()
-    ; second digit identifier, or 3 for b
+    ; third digit identifier, or 4 for s
     switch (ih.Input) {
         case "0": ; 240
             course := "240c"
